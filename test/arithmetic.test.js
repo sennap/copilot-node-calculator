@@ -96,6 +96,81 @@ describe('Arithmetic', function () {
         });
     });
 
+    // UNIT TESTS FOR SUBTRACTION
+describe('Subtraction', function () {
+    it('subtracts two positive integers', function (done) {
+        request.get('/arithmetic?operation=subtract&operand1=2&operand2=1')
+            .expect(200)
+            .end(function(err, res){
+                expect(res.body).to.eql({result: 1});
+                done();
+            });
+    });
+
+    it('subtracts a negative number from a positive number', function (done) {
+        request.get('/arithmetic?operation=subtract&operand1=2&operand2=-1')
+            .expect(200)
+            .end(function(err, res){
+                expect(res.body).to.eql({result: 3});
+                done();
+            });
+    });
+
+    it('subtracts a positive number from a negative number', function (done) {
+        request.get('/arithmetic?operation=subtract&operand1=-2&operand2=1')
+            .expect(200)
+            .end(function(err, res){
+                expect(res.body).to.eql({result: -3});
+                done();
+            });
+    });
+
+    it('subtracts two negative numbers', function (done) {
+        request.get('/arithmetic?operation=subtract&operand1=-2&operand2=-1')
+            .expect(200)
+            .end(function(err, res){
+                expect(res.body).to.eql({result: -1});
+                done();
+            });
+    });
+
+    it('subtracts zero from a number', function (done) {
+        request.get('/arithmetic?operation=subtract&operand1=2&operand2=0')
+            .expect(200)
+            .end(function(err, res){
+                expect(res.body).to.eql({result: 2});
+                done();
+            });
+    });
+
+    it('subtracts a number from zero', function (done) {
+        request.get('/arithmetic?operation=subtract&operand1=0&operand2=2')
+            .expect(200)
+            .end(function(err, res){
+                expect(res.body).to.eql({result: -2});
+                done();
+            });
+    });
+
+    it('subtracts two floating point numbers', function (done) {
+        request.get('/arithmetic?operation=subtract&operand1=1.5&operand2=0.5')
+            .expect(200)
+            .end(function(err, res){
+                expect(res.body).to.eql({result: 1.0});
+                done();
+            });
+    });
+
+    it('subtracts supporting exponential notation', function (done) {
+        request.get('/arithmetic?operation=subtract&operand1=1e1&operand2=9')
+            .expect(200)
+            .end(function(err, res){
+                expect(res.body).to.eql({result: 1});
+                done();
+            });
+    });
+});
+
  
     // UNIT TESTS FOR MULTIPLICATION
     describe('Multiplication', function () {
